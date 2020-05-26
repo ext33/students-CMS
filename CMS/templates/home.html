@@ -13,26 +13,30 @@
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
         <div class="inner">
-            <h3 class="masthead-brand">Cover</h3>
+            <h3 class="masthead-brand">Stud-CMS</h3>
             <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="#">Home</a>
-                <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link active" href="{% url 'home' %}">Главная</a>
+                {% if user.is_authenticated %}
+                <a class="nav-link" href="{% url 'profile' %}">Профиль</a>
+                <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+                {% else %}
+                <a class="nav-link" href="{% url 'login' %}">Вход</a>
+                {% endif %}
             </nav>
         </div>
     </header>
 
     <main role="main" class="inner cover">
-        <h1 class="cover-heading">text.</h1>
-        <p class="lead">text.</p>
+        <h1 class="cover-heading">Отслеживайте свою успеваемость!</h1>
+        <p class="lead">Удобный сервис для студентов и преподавателей.</p>
         <p class="lead">
-          <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+          <a href="{% url 'profile' %}" class="btn btn-lg btn-secondary">Вперед!</a>
         </p>
     </main>
 
     <footer class="mastfoot mt-auto">
         <div class="inner">
-            <p><a href="">CMS</a>, by <a href="https://github.com/ext33">@ext3</a>.</p>
+            <p><a href="https://github.com/ext33/students-CMS">Stud-CMS</a> by <a href="https://github.com/ext33">@ext33</a>.</p>
         </div>
     </footer>
 </div>

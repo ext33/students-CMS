@@ -6,7 +6,7 @@ from .models import *
 
 @admin.register(Users)
 class Users(admin.ModelAdmin):
-    list_display = ('FIO', 'group', 'telephone')
+    list_display = ('email', 'FIO', 'group', 'telephone')
     list_filter = ('FIO', 'group')
 
 

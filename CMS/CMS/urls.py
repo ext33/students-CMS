@@ -19,5 +19,5 @@ from CMS import settings
 
 urlpatterns = [
     path('', include('CMSWeb.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS)
 

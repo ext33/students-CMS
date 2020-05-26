@@ -7,10 +7,12 @@ from django.db import models
 class Groups(models.Model):
     group = models.CharField(
         max_length=200,
+        default='-',
         verbose_name='Группа'
     )
-    course = models.IntegerField(
-        null=True,
+    course = models.CharField(
+        max_length=2,
+        default='-',
         verbose_name='Курс'
     )
     direction = models.CharField(
