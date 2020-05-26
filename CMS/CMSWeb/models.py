@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.db import models
 
 # Create your models here.
@@ -22,8 +22,8 @@ class Groups(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Группы'
-        verbose_name_plural = 'Группы'
+        verbose_name = 'Учебные группы'
+        verbose_name_plural = 'Учебные группы'
 
     def __str__(self):
         return self.group
@@ -50,12 +50,12 @@ class Subject(models.Model):
         return self.subject
 
 
-class Users(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.DO_NOTHING,
-        verbose_name='Пользователь'
-    ),
+class Users(AbstractUser):
+    # user = models.OneToOneField(
+    #     User,
+    #     on_delete=models.DO_NOTHING,
+    #     verbose_name='Пользователь'
+    # ),
     email = models.EmailField(
         max_length=200,
         verbose_name='Почта'
@@ -67,7 +67,9 @@ class Users(models.Model):
     group = models.ForeignKey(
         Groups,
         on_delete=models.DO_NOTHING,
-        verbose_name='Группа'
+        verbose_name='Группа',
+        default=None,
+        null=True
     )
     FIO = models.CharField(
         max_length=200,

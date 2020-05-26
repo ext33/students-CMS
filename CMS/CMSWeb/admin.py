@@ -1,13 +1,14 @@
 from django.contrib import admin
 from .models import *
-
+from django.contrib.auth.admin import UserAdmin
 # Register your models here.
 
 
 @admin.register(Users)
-class Users(admin.ModelAdmin):
-    list_display = ('email', 'FIO', 'group', 'telephone')
-    list_filter = ('FIO', 'group')
+class UsersAdmin(admin.ModelAdmin):
+    fields = ('username', 'password', 'email', 'telephone', 'FIO', 'group', 'is_active', 'is_staff', 'is_superuser')
+    list_display = ('username', 'FIO', 'group')
+    list_filter = ('group', 'is_staff', 'is_active')
 
 
 @admin.register(Groups)
