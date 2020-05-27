@@ -1,5 +1,8 @@
-from django.contrib.auth.models import User, AbstractUser
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import User, AbstractUser, PermissionsMixin
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
+from .managers import CustomUserManager
 
 # Create your models here.
 
@@ -18,6 +21,7 @@ class Groups(models.Model):
     direction = models.CharField(
         null=True,
         max_length=200,
+        default='-',
         verbose_name='Специальность'
     )
 
@@ -50,15 +54,11 @@ class Subject(models.Model):
         return self.subject
 
 
-class Users(AbstractUser):
-    # user = models.OneToOneField(
-    #     User,
-    #     on_delete=models.DO_NOTHING,
-    #     verbose_name='Пользователь'
-    # ),
+class CustomUser(AbstractUser):
+    username = None
     email = models.EmailField(
-        max_length=200,
-        verbose_name='Почта'
+        _('email address'),
+        unique=True
     )
     telephone = models.CharField(
         max_length=12,
@@ -76,12 +76,46 @@ class Users(AbstractUser):
         verbose_name='ФИО'
     )
 
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = CustomUserManager()
+
     class Meta:
         verbose_name = 'Пользователи'
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return self.FIO
+        return self.email
+
+
+# class Users(AbstractUser):
+#     email = models.EmailField(
+#         max_length=200,
+#         verbose_name='Почта'
+#     )
+#     telephone = models.CharField(
+#         max_length=12,
+#         verbose_name='Телефон'
+#     )
+#     group = models.ForeignKey(
+#         Groups,
+#         on_delete=models.DO_NOTHING,
+#         verbose_name='Группа',
+#         default=None,
+#         null=True
+#     )
+#     FIO = models.CharField(
+#         max_length=200,
+#         verbose_name='ФИО'
+#     )
+#
+#     class Meta:
+#         verbose_name = 'Пользователи'
+#         verbose_name_plural = 'Пользователи'
+#
+#     def __str__(self):
+#         return self.FIO
 
 
 class Performance(models.Model):
@@ -89,9 +123,8 @@ class Performance(models.Model):
         ('exam', 'Экзамен'),
         ('offset', 'Зачет')
     )
-
     FIO = models.ForeignKey(
-        Users,
+        CustomUser,
         on_delete=models.DO_NOTHING,
         verbose_name='ФИО студента'
     )

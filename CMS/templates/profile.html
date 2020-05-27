@@ -34,8 +34,8 @@
         <h4>Телефон: {{ user.telephone }}</h4>
         <hr>
         <h4>Ваша группа: {{ user.group }}</h4>
-        <h4>Ваш курс: {{ user.group.cource }}</h4>
-        <h4>Ваша специальность: {{ user.direction }}</h4>
+        <h4>Ваш курс: {{ user.group.course }}</h4>
+        <h4>Ваша специальность: {{ user.group.direction }}</h4>
         <hr>
     </div>
         {% if user.is_staff %}
@@ -44,12 +44,6 @@
         <h2>Ваша успеваемость:</h2>
 
         {% endif %}
-
-{#    <footer class="mastfoot mt-auto">#}
-{#        <div class="inner">#}
-{#            <p><a href="https://github.com/ext33/students-CMS">Stud-CMS</a> by <a href="https://github.com/ext33">@ext33</a>.</p>#}
-{#        </div>#}
-{#    </footer>#}
 </div>
 </body>
 

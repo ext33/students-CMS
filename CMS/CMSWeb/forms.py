@@ -1,6 +1,6 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from .models import CustomUser
 
 
 class PlaceholderForm(forms.Form):
@@ -11,5 +11,19 @@ class PlaceholderForm(forms.Form):
 
 
 class LoginForm(PlaceholderForm):
-    username = forms.CharField(max_length=200, label='Login', help_text='Имя пользователя')
+    username = forms.CharField(max_length=200, label='Login', help_text='Email')
     password = forms.CharField(max_length=200, widget=forms.PasswordInput, help_text='Пароль')
+
+
+class CustomUserCreationForm(UserCreationForm):
+
+    class Meta(UserCreationForm):
+        model = CustomUser
+        fields = ('email',)
+
+
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('email',)

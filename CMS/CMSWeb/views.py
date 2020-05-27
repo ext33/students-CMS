@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import auth_logout
@@ -42,7 +41,7 @@ class Login(TemplateView):
                         login(request, user)
                         return redirect('profile')
                     else:
-                        error = 'Логин или пароль неправильные'
+                        error = 'Такого пользователя не существует'
                 else:
                     error = 'Логин или пароль неправильные'
 
