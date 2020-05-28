@@ -86,42 +86,13 @@ class CustomUser(AbstractUser):
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return self.email
-
-
-# class Users(AbstractUser):
-#     email = models.EmailField(
-#         max_length=200,
-#         verbose_name='Почта'
-#     )
-#     telephone = models.CharField(
-#         max_length=12,
-#         verbose_name='Телефон'
-#     )
-#     group = models.ForeignKey(
-#         Groups,
-#         on_delete=models.DO_NOTHING,
-#         verbose_name='Группа',
-#         default=None,
-#         null=True
-#     )
-#     FIO = models.CharField(
-#         max_length=200,
-#         verbose_name='ФИО'
-#     )
-#
-#     class Meta:
-#         verbose_name = 'Пользователи'
-#         verbose_name_plural = 'Пользователи'
-#
-#     def __str__(self):
-#         return self.FIO
+        return self.FIO
 
 
 class Performance(models.Model):
     FORMS = (
-        ('exam', 'Экзамен'),
-        ('offset', 'Зачет')
+        ('Экзамен', 'Экзамен'),
+        ('Зачет', 'Зачет')
     )
     FIO = models.ForeignKey(
         CustomUser,
@@ -157,4 +128,4 @@ class Performance(models.Model):
         verbose_name_plural = 'Успеваемость'
 
     def __str__(self):
-        return self.FIO
+        return str(self.FIO)

@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import auth_logout
 from CMSWeb.forms import LoginForm
-
+from .models import Performance
 
 # Create your views here.
 
@@ -19,7 +19,18 @@ class Profile(TemplateView):
         if not request.user.is_authenticated:
             return redirect('login')
         else:
-            return render(request, self.template_name, )
+            if request.user.is_staff:
+                return render(request, self.template_name)
+            else:
+                perf = {}
+
+                if Performance.objects.filter(FIO=request.user):
+                    for obj in Performance.objects.filter(FIO=request.user):
+                        obj.data = [obj.subject, obj.mark, obj.reporting_form]
+                        perf[obj.date] = obj.data
+
+            tup_len = len(perf)
+            return render(request, self.template_name, context={'perf': perf, 'tup_len': tup_len})
 
 
 class Login(TemplateView):
