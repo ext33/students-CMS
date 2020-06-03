@@ -1,0 +1,40 @@
+version: '3'
+services:
+  volumes:
+    pgdata:
+        driver: local
+services:
+    nginx:
+        restart: always
+        image: nginx
+        expose:
+           - 8080
+        ports:
+          - 8080:8080
+        volumes:
+            - ./CMS/static/:/srv/www/CMS/static/
+            - ./CMS/logs:/srv/www/CMS/logs
+            - ./nginx-server.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - python
+    python:
+        restart: always
+        build:
+            context: .
+            dockerfile: dockerfile
+        volumes:
+            - ./CMS:/srv/www/CMS
+        ports:
+            - 8000:8000
+        command: "bash entrypoint.sh"
+        env_file:
+            - env.config
+    db:
+      image: postgres
+      environment:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: '123456'
+          POSTGRES_DB: studdb
+          PGDATA: /var/lib/postgresql/data/pgdata
+      volumes:
+          - ./pgdata/:/var/lib/postgresql/data/pgdata
