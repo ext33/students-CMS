@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Домашняя страница</title>
+    <title>Ваш профиль</title>
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/base.css' %}">
     <link rel="stylesheet" href="{% static '/css/profile.css' %}">
@@ -32,11 +32,15 @@
         <hr>
         <h4>Email: {{ user.email }}</h4>
         <h4>Телефон: {{ user.telephone }}</h4>
+        {% if user.is_staff %}
+        <hr>
+        {% else %}
         <hr>
         <h4>Ваша группа: {{ user.group }}</h4>
         <h4>Ваш курс: {{ user.group.course }}</h4>
         <h4>Ваша специальность: {{ user.group.direction }}</h4>
         <hr>
+        {% endif %}
     </div>
         {% if user.is_staff %}
         <a href="{% url 'admin:index' %}" class="btn btn-lg btn-secondary">Войти в админку</a>

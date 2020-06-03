@@ -68,8 +68,6 @@ class CustomUser(AbstractUser):
         Groups,
         on_delete=models.DO_NOTHING,
         verbose_name='Группа',
-        default=None,
-        null=True
     )
     FIO = models.CharField(
         max_length=200,

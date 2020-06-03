@@ -11,7 +11,7 @@ class PlaceholderForm(forms.Form):
 
 
 class LoginForm(PlaceholderForm):
-    username = forms.CharField(max_length=200, label='Login', help_text='Email')
+    email = forms.CharField(max_length=200, label='Login', help_text='Email')
     password = forms.CharField(max_length=200, widget=forms.PasswordInput, help_text='Пароль')
 
 
