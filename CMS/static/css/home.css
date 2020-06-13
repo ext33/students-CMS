@@ -4,6 +4,12 @@ html, body{
 
 .card{
     border-radius: 15px !important;
+    align-items: center;
+}
+
+.card img {
+    width: 150px;
+    height: 150px;
 }
 
 .main{
@@ -11,5 +17,4 @@ html, body{
   border-radius: 15px;
   background: white;
   padding: 5%;
-
 }

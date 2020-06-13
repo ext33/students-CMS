@@ -27,13 +27,12 @@
         </div>
     </header>
 <div class="main">
-    <div class="head">
+    <div class="head cont">
         <h2>Здравствуйте, {{ user.FIO }}!</h2>
         <hr>
         <h4>Email: {{ user.email }}</h4>
         <h4>Телефон: {{ user.telephone }}</h4>
         {% if user.is_staff %}
-        <hr>
         {% else %}
         <hr>
         <h4>Ваша группа: {{ user.group }}</h4>
@@ -42,36 +41,38 @@
         <hr>
         {% endif %}
     </div>
-    <div>
         {% if user.is_staff %}
-        <a href="{% url 'admin:index' %}" class="btn btn-lg btn-secondary">Административная часть</a>
+            <div class="admin">
+                <a href="{% url 'admin:index' %}" class="btn btn-lg btn-secondary">Административная часть</a>
+            </div>
         {% else %}
-        <h2>Ваша успеваемость:</h2>
-            <table>
-                {% if tup_len >= 1 %}
-                <tr>
-                    <th>Предмет </th>
-                    <th>Оценка</th>
-                    <th>Форма отчетности</th>
-                    <th>Дата</th>
-                </tr>
-                {% for key, val in perf.items %}
-                <tr>
-                    <td>{{ val.0 }}</td>
-                    <td>{{ val.1 }}</td>
-                    <td>{{ val.2 }}</td>
-                    <td>{{ key }}</td>
-                </tr>
-                {% endfor %}
-                {% else %}
-                <tr>
-                    <td>Здесь пока ничего нету</td>
-                </tr>
-                {% endif %}
-            </table>
-        {% endif %}
+        <div class="cont mt-2">
+            <h2>Ваша успеваемость:</h2>
+                <table>
+                    {% if tup_len >= 1 %}
+                    <tr>
+                        <th>Предмет </th>
+                        <th>Оценка</th>
+                        <th>Форма отчетности</th>
+                        <th>Дата</th>
+                    </tr>
+                    {% for key, val in perf.items %}
+                    <tr>
+                        <td>{{ val.0 }}</td>
+                        <td>{{ val.1 }}</td>
+                        <td>{{ val.2 }}</td>
+                        <td>{{ key }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td>Здесь пока ничего нету</td>
+                    </tr>
+                    {% endif %}
+                </table>
+            {% endif %}
+        </div>
     </div>
-</div>
 </div>
 </body>
 
