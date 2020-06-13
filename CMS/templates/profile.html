@@ -26,7 +26,7 @@
             </nav>
         </div>
     </header>
-
+<div class="main">
     <div class="head">
         <h2>Здравствуйте, {{ user.FIO }}!</h2>
         <hr>
@@ -42,11 +42,12 @@
         <hr>
         {% endif %}
     </div>
+    <div>
         {% if user.is_staff %}
-        <a href="{% url 'admin:index' %}" class="btn btn-lg btn-secondary">Войти в админку</a>
+        <a href="{% url 'admin:index' %}" class="btn btn-lg btn-secondary">Административная часть</a>
         {% else %}
         <h2>Ваша успеваемость:</h2>
-            <table cellspacing='0'>
+            <table>
                 {% if tup_len >= 1 %}
                 <tr>
                     <th>Предмет </th>
@@ -69,6 +70,8 @@
                 {% endif %}
             </table>
         {% endif %}
+    </div>
+</div>
 </div>
 </body>
 

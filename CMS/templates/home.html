@@ -6,10 +6,11 @@
     <title>Домашняя страница</title>
     {% load static %}
     <link rel="stylesheet" href="{% static '/css/base.css' %}">
+    <link rel="stylesheet" href="{% static '/css/home.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
-<body>
+<body class="text-center">
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
         <div class="inner">
@@ -26,13 +27,32 @@
         </div>
     </header>
 
-    <main role="main" class="inner cover">
-        <h1 class="cover-heading">Отслеживайте свою успеваемость!</h1>
+    <main role="main" class="inner cover main mt-5">
+        <p class="cover-heading">Отслеживайте свою успеваемость!</p>
         <p class="lead">Удобный сервис для студентов и преподавателей.</p>
         <p class="lead">
           <a href="{% url 'profile' %}" class="btn btn-lg btn-secondary">Вперед!</a>
         </p>
     </main>
+
+    <div class="row mt-5 mb-5">
+      <div class="col-sm-6 mb-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Для студентов:</h5>
+            <p class="card-text">Вы всегда и везде сможете узнать свои оценки за семестр, будь то это зачет или экзамен!</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Для преподавателей</h5>
+            <p class="card-text">Вы лего сможете заполнить оценочную ведомость и предоставить студентам актуалную информацию!</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <footer class="mastfoot mt-auto">
         <div class="inner">
