@@ -415,7 +415,7 @@ web-data/
 # Created by https://www.gitignore.io/api/virtualenv
 # Edit at https://www.gitignore.io/?templates=virtualenv
 pgdata/
-art/static/admin/
+/CMS/static/admin/
 # End of https://www.gitignore.io/api/virtualenv
 
 # End of https://www.gitignore.io/api/vue,node,vuejs,django,python,windows,pycharm+all
