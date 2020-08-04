@@ -4,8 +4,13 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import auth_logout
 from CMSWeb.forms import LoginForm
 from .models import Performance
+import logging
 
 # Create your views here.
+
+logger = logging.getLogger(
+    __name__
+)
 
 
 class Home(TemplateView):
@@ -50,11 +55,14 @@ class Login(TemplateView):
                     user = authenticate(request, username=email, password=password)
                     if user is not None:
                         login(request, user)
+                        logger.debug(f'{user} is authorized')
                         return redirect('profile')
                     else:
                         error = 'Такого пользователя не существует'
+                        logger.debug('user not found')
                 else:
                     error = 'Логин или пароль неправильные'
+                    logger.debug('incorrect login or password')
 
             return render(request, self.template_name, {'form': form, 'error': error})
 
@@ -62,3 +70,5 @@ class Login(TemplateView):
 def logout(request):
     auth_logout(request)
     return redirect('login')
+
+

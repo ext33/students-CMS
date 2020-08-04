@@ -132,3 +132,29 @@ AUTH_USER_MODEL = 'CMSWeb.CustomUser'
 
 DJANGO_SUPERUSER_EMAIL = os.environ.get("DJANGO_SUPERUSER_EMAIL")
 DJANGO_SUPERUSER_PASSWORD = os.environ.get("DJANGO_SUPERUSER_PASSWORD")
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'myFormatter': {
+            'format': '{levelname} {asctime} {module} {process:d} - {message}',
+            'style': '{'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'WARNING',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/django_logs.log'),
+            'formatter': 'myFormatter'
+        },
+    },
+    'loggers': {
+        'CMSWeb': {
+            'handlers': ['file'],
+            'level': 'WARNING',
+            'propagate': True,
+        },
+    },
+}
